@@ -1,0 +1,53 @@
+import {
+  SET_LOADING,
+  SEARCH_STOCK,
+  SET_STOCK_GRAPH_DATA,
+  REMOVE_FROM_WATCHLIST,
+  ADD_TO_WATCHLIST,
+} from '../types';
+
+const StockReducer = (state, action) => {
+  switch (action.type) {
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SEARCH_STOCK:
+      return {
+        ...state,
+        stock: action.payload,
+        loading: false,
+        inWatchlist: state.stocks.find(
+          (s) => s.symbol === action.payload.symbol
+        )
+          ? true
+          : false,
+      };
+    case SET_STOCK_GRAPH_DATA:
+      return {
+        ...state,
+        stockGraphData: action.payload[0],
+        stockGraphOptions: action.payload[1],
+        loading: false,
+      };
+    case REMOVE_FROM_WATCHLIST:
+      return {
+        ...state,
+        stocks: state.stocks.filter((s) => s.symbol !== state.stock.symbol),
+        inWatchlist: false,
+      loading: false,
+      };
+    case ADD_TO_WATCHLIST:
+      return {
+        ...state,
+        stocks: [...state.stocks, state.stock],
+        inWatchlist: true,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export default StockReducer;
