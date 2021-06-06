@@ -26,10 +26,7 @@ router.get('/', auth, async (req, res) => {
 // @access  Private
 router.post(
   '/',
-  [
-    auth,
-    check('symbol', 'Symbol is required').not().isEmpty()
-  ],
+  [auth, check('symbol', 'Symbol is required').not().isEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -38,25 +35,24 @@ router.post(
 
     const { symbol, type } = req.body;
 
-
     try {
-      
-      let result = await Watchlist.findOne({symbol: symbol});
+      let result = await Watchlist.findOne({
+        user: req.user.id,
+        symbol: symbol,
+      });
 
       if (result) {
-        return res.status(400).json({msg: 'Symbol already exists'})
+        return res.status(400).json({ msg: 'Symbol already exists' });
       }
-    
+
       const newStock = new Watchlist({
         user: req.user.id,
         symbol,
         type,
-
       });
 
       const watchlist = await newStock.save();
-
-      res.json({  watchlist  });
+      res.json({ watchlist });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
@@ -64,7 +60,7 @@ router.post(
   }
 );
 
-// @route   DELETE api/watchlist/:id
+// @route   DELETE api/watchlist/:symbol
 // @desc    Delete watchlist
 // @access  Private
 router.delete('/:symbol', auth, async (req, res) => {

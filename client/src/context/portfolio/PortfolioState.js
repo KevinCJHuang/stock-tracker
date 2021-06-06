@@ -7,6 +7,7 @@ import {} from '../types';
 const PortfolioState = (props) => {
   const initialState = {
     worth: 0,
+    cash: 0,
     portfolioStocks: [],
     portfolioGraphData: {},
     portfolioGraphOptions: {},
@@ -14,6 +15,13 @@ const PortfolioState = (props) => {
 
   const [state, dispatch] = useReducer(PortfolioReducer, initialState);
 
+  // Calculate worth
+
+  // Buy shares
+
+  // Sell Shares
+
+  
   return (
     <PortfolioContext.Provider
       value={{

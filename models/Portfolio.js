@@ -8,12 +8,12 @@ const UserSchema = mongoose.Schema({
   symbol: {
     type: String,
     required: true,
+    unique: true,
   },
-  type: {
-    type: String,
+  numShares: {
+    type: Number,
     required: true,
-    default: 'stock',
   },
 });
 
-module.exports = mongoose.model('watchlist', UserSchema);
+module.exports = mongoose.model('portfolio', UserSchema);

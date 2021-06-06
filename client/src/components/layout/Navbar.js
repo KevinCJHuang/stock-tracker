@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import StockContext from '../../context/stock/stockContext';
 import AuthContext from '../../context/auth/authContext';
@@ -42,54 +42,55 @@ const Navbar = () => {
         </button>
 
         <div className='collapse navbar-collapse' id='navbarToggler'>
-          <ul className='navbar-nav'>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/'>
-                Home
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/about'>
-                About
-              </Link>
-            </li>{' '}
-          </ul>
-
-          <form
-            className='form-inline mx-auto'
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <input
-              className='form-control mr-2'
-              type='search'
-              value={symbol}
-              name='symbol'
-              placeholder='Search for a symbol...'
-              onChange={onChange}
-            />
-
-            <Link
-              to='/stock'
-              className='btn btn-outline-dark'
-              type='submit'
-              onClick={onSubmit}
-            >
-              Search
-            </Link>
-          </form>
-
           {isAuthenticated ? (
-            <ul className='navbar-nav'>
-              <li className='nav-item'>
-                <a href='#!' onClick={logoutOnClick}>
-                  <span className='hide-sm nav-link'>Logout</span>
-                </a>
-              </li>
-            </ul>
+            <Fragment>
+              <ul className='navbar-nav'>
+                <li className='nav-item'>
+                  <Link className='nav-link' to='/'>
+                    Home
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link className='nav-link' to='/about'>
+                    About
+                  </Link>
+                </li>
+              </ul>
+                        <form
+                            className='form-inline mx-auto'
+                            onSubmit={(e) => {
+                              e.preventDefault();
+                            }}
+                          >
+                            <input
+                              className='form-control mr-2'
+                              type='search'
+                              value={symbol}
+                              name='symbol'
+                              placeholder='Search for a symbol...'
+                              onChange={onChange}
+                            />
+
+                                    <Link
+                                      to='/stock'
+                                      className='btn btn-outline-dark'
+                                      type='submit'
+                                      onClick={onSubmit}
+                                    >
+                                      Search
+                                    </Link>
+                                  </form>
+                        <ul className='navbar-nav'>
+                          <li className='nav-item'>
+                            <a href='#!' onClick={logoutOnClick}>
+                              <span className='hide-sm nav-link'>Logout</span>
+                            </a>
+                          </li>
+                        </ul>
+            </Fragment>
           ) : (
-            <ul className='navbar-nav'>
+            <ul className='navbar-nav ml-auto'>
+              
               <li className='nav-item'>
                 <Link className='nav-link' to='/login'>
                   Login
