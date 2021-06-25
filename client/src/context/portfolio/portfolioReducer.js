@@ -7,26 +7,29 @@ import {
 const PortfolioReducer = (state, action) => {
   switch (action.type) {
     case SET_LOADING:
-      return {  ...state, loading: true  };
+      return { ...state, loading: true };
     case GET_MONEY:
-      return {...state, cashWorth: action.payload}
+      return { ...state, cashWorth: action.payload };
     case ADD_TO_PORTFOLIO:
       return {
         ...state,
-        portfolioStocks:  [...state.portfolioStocks, action.payload],
-        loading: false, 
-      } 
-    case CALCULATE_STOCK_WORTH:   
-      return { 
+        portfolioStocks: [...state.portfolioStocks, action.payload],
+        loading: false,
+      };
+    case CALCULATE_STOCK_WORTH:
+      return {
         ...state,
-        stockWorth: state.portfolioStocks.reduce((a, {worth}) => a + worth, 0)
+        stockWorth: state.portfolioStocks.reduce(
+          (a, { worth }) => a + worth,
+          0
+        ),
       };
     case CALCULATE_CASH_WORTH: {
       return {
         ...state,
         cashWorth: action.payload,
-        worth: action.payload + state.stockWorth
-      }
+        worth: action.payload + state.stockWorth,
+      };
     }
     case SET_PIE:
       let labels = [];
@@ -35,7 +38,7 @@ const PortfolioReducer = (state, action) => {
         labels.push(stock.symbol);
         stockWorth.push(stock.worth);
       });
-      labels.push("Cash");
+      labels.push('Cash');
       stockWorth.push(state.cashWorth);
       return {
         ...state,
@@ -50,28 +53,27 @@ const PortfolioReducer = (state, action) => {
                 '#d6f5d6',
                 '#fff5cc',
                 '#ffcccc',
-                "#f0c2e0"
+                '#f0c2e0',
               ],
               data: stockWorth,
             },
           ],
-        }
-      }
+        },
+      };
     case SELL_SHARES_SUCCESS:
     case BUY_SHARES_SUCCESS:
-      state.portfolioStocks.forEach(s => {
+      state.portfolioStocks.forEach((s) => {
         if (s.symbol === action.payload.symbol) {
           s.numShares = action.payload.numShares;
-          s.worth = s.latestPrice * s.numShares
+          s.worth = s.latestPrice * s.numShares;
         }
       });
       return {
         ...state,
-      }
+      };
     case SELL_SHARES_FAIL:
     case BUY_SHARES_FAIL:
-      console.log("Buy Shares Failed");
-      return {...state}
+      return { ...state };
 
     default:
       return state;
