@@ -48,6 +48,7 @@ router.post(
           user: req.user.id,
           symbol: req.body.symbol,
           numShares: req.body.numShares,
+          type: req.body.type,
         });
 
         const result = await newPortfolio.save();
@@ -58,13 +59,14 @@ router.post(
       if (req.body.numShares + portfolio.numShares < 0) {
         return res.status(400).json({ msg: 'Shares can not be negative' });
       }
+      console.log(req.body.numShares)
+      console.log(portfolio)
 
       portfolio = await Portfolio.findByIdAndUpdate(
         portfolio._id,
         {
-          numShares: req.body.numShares + portfolio.numShares,
+          numShares: parseInt(req.body.numShares) + parseInt(portfolio.numShares),
         },
-        { new: true }
       );
       return res.json(portfolio);
     } catch (err) {

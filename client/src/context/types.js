@@ -14,6 +14,15 @@ export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 
 // Portfolios
+export const CALCULATE_STOCK_WORTH = 'CALCULATE_STOCK_WORTH';
+export const CALCULATE_CASH_WORTH = 'CALCULATE_CASH_WORTH';
+export const ADD_TO_PORTFOLIO = 'ADD_TO_PORTFOLIO';
+export const GET_MONEY = 'GET_MONEY';
+export const SET_PIE = 'SET_PIE';
+export const BUY_SHARES_FAIL = 'BUY_SHARES_FAIL';
+export const BUY_SHARES_SUCCESS = 'BUY_SHARES_SUCCESS';
+export const SELL_SHARES_FAIL = 'SELL_SHARES_FAIL';
+export const SELL_SHARES_SUCCESS = 'SELL_SHARES_SUCCESS';
 
 // Authentication
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -24,3 +33,6 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+// Buy Sell
+export const SET_BUYSELL = 'SET_BUYSELL';

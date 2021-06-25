@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const config = require('config')
 const User = require('../models/Users');
+const Portfolio = require('../models/Portfolio');
 
 // @route   POST api/users
 // @desc    Register a user
@@ -39,11 +40,19 @@ router.post(
         password
       });
 
+
       const salt = await bcrypt.genSalt(10);
 
       user.password = await bcrypt.hash(password, salt);
 
       await user.save()
+      const portfolio = new Portfolio({
+        user: user._id,
+        symbol: 'Cash',
+        numShares: 2000,
+        type: 'cash',
+      });
+      await portfolio.save();
 
       const payload={
         user: {
@@ -51,13 +60,17 @@ router.post(
         }
       }
 
-      jwt.sign(payload, config.get('jwtSecret'), {
-        expiresIn: 720000
-      }, (err, token) => {
-        if (err) throw err;
-        res.json({token});
-      })
-
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        {
+          expiresIn: 720000,
+        },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch(err) {
       console.error(err.message);
       res.status(500).send('Server Error')

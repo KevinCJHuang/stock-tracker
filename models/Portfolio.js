@@ -8,12 +8,15 @@ const UserSchema = mongoose.Schema({
   symbol: {
     type: String,
     required: true,
-    unique: true,
   },
   numShares: {
     type: Number,
     required: true,
   },
-});
-
+  type: {
+    type: String,
+    default: "stock"
+  }
+}, {"strict": false });
+UserSchema.index({ "user": 1, "symbol": 1}, { "unique": true });
 module.exports = mongoose.model('portfolio', UserSchema);

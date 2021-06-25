@@ -6,7 +6,6 @@ import {
   ADD_TO_WATCHLIST,
   WATCHLIST_ERROR,
   CLEAR_STOCKS,
-  WATCHLIST_SORT,
 } from '../types';
 
 const StockReducer = (state, action) => {
@@ -57,14 +56,6 @@ const StockReducer = (state, action) => {
         ...state,
         error: action.payload,
       };
-    // case WATCHLIST_SORT:
-    //   console.log('sorting');
-    //   return {
-    //     ...state,
-    //     stocks: state.stocks.sort((state1, state2) =>
-    //       state1.symbol > state2.symbol ? 1 : -1
-    //     ),
-    //   };
     default:
       return state;
   }

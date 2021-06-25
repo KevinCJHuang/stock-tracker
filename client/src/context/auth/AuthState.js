@@ -50,6 +50,7 @@ const AuthState = (props) => {
     };
 
     try {
+      // Register
       const res = await axios.post('/api/users', newUser, config);
 
       dispatch({
@@ -58,6 +59,16 @@ const AuthState = (props) => {
       });
 
       loadUser();
+
+      // const res2 = await axios.post(
+      //   '/api/portfolio',
+      //   {
+      //     symbol: 'Cash',
+      //     numShares: 2000,
+      //     type: 'cash',
+      //   },
+      //   config
+      // );
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,

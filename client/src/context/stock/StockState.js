@@ -10,7 +10,6 @@ import {
   ADD_TO_WATCHLIST,
   WATCHLIST_ERROR,
   CLEAR_STOCKS,
-  WATCHLIST_SORT,
 } from '../types';
 
 const ixeToken = process.env.REACT_APP_IEX_TPK;
@@ -107,7 +106,6 @@ const StockState = (props) => {
   };
 
   const getStocks = async () => {
-    console.log('get stocks');
     dispatch({ type: SET_LOADING });
     dispatch({ type: CLEAR_STOCKS });
 
@@ -128,7 +126,7 @@ const StockState = (props) => {
     };
 
     try {
-      const res = await axios.post(
+      await axios.post(
         '/api/watchlist',
         { symbol: state.stock.symbol },
         config
@@ -147,10 +145,7 @@ const StockState = (props) => {
     };
 
     try {
-      const res = await axios.delete(
-        `/api/watchlist/${state.stock.symbol}`,
-        config
-      );
+      await axios.delete(`/api/watchlist/${state.stock.symbol}`, config);
       dispatch({ type: REMOVE_FROM_WATCHLIST });
     } catch (error) {
       dispatch({ type: WATCHLIST_ERROR, payload: error.response.msg });

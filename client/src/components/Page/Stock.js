@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import StockContext from '../../context/stock/stockContext';
 import AlertContext from '../../context/alert/alertContext';
+import BuySellContext from '../../context/buySell/buySellContext';
 
 import Spinner from '../layout/Spinner';
 import { Line } from 'react-chartjs-2';
@@ -9,6 +10,7 @@ const Stock = (props) => {
   // Stock context
   const stockContext = useContext(StockContext);
   const alertContext = useContext(AlertContext);
+  const buySellContext = useContext(BuySellContext);
 
   const {
     loading,
@@ -21,7 +23,8 @@ const Stock = (props) => {
     removeFromWatchList,
   } = stockContext;
   const { setAlert } = alertContext;
-
+  const { set_buySell } = buySellContext;
+  
   const setTimeRange = (e) => {
     getStockData(
       stock.symbol,
@@ -40,6 +43,16 @@ const Stock = (props) => {
     removeFromWatchList();
     setAlert(stock.symbol + ' removed from watchlist', 'success');
   };
+
+  const buy = (e) => {
+    set_buySell('buy')
+    props.history.push('/buySell');
+  }
+  const sell = (e) => {
+    set_buySell('sell')
+    props.history.push('/buySell');
+  }
+  
   if (loading) {
     return <Spinner />;
   } else {
@@ -52,27 +65,32 @@ const Stock = (props) => {
                 <h2 className='card-title '>{stock.companyName} </h2>
                 <h4 className='card-subtitle text-muted'>({stock.symbol})</h4>
               </div>
+              <div className='col-3'>
+
               {inWatchlist ? (
-                <div className='col-3'>
                   <button
-                    className='btn btn-dark'
+                    className='btn btn-dark btn-block mb-3'
                     onClick={removeFromWatchlistClick}
                   >
                     <i className='fa fa-minus mr-2'></i>
                     Remove from Watchlist
                   </button>
-                </div>
               ) : (
-                <div className='col-3'>
                   <button
-                    className='btn btn-light'
+                    className='btn btn-light btn-block mb-3'
                     onClick={addToWatchlistClick}
                   >
                     <i className='fa fa-plus mr-2'></i>
                     Add to Watchlist
                   </button>
-                </div>
               )}
+              <div className="row">
+                <div className="col-6"><button className="btn btn-outline-success btn-block" onClick={buy}>Buy</button></div>
+                <div className="col-6"><button className="btn btn-outline-danger btn-block" onClick={sell}>Sell</button></div>
+              </div>
+
+              </div>
+
             </div>
           </div>
         </div>

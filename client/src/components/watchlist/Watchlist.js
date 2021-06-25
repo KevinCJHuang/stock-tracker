@@ -8,20 +8,22 @@ const Watchlist = () => {
 
   useEffect(() => {
     getStocks();
+    // eslint-disable-next-line
   }, []);
   return (
     <Fragment>
-      <div className='card m-2 border-0'>
-        <div className='card-body'>
+      <div className='card m-3'>
+        <div className='card-body text-center'>
           <div className='display-3'>Watchlist</div>
         </div>
-      </div>
       {stocks.map((watchlistItem) => (
         <WatchlistItem
           watchlistItem={watchlistItem}
           key={watchlistItem.symbol}
         ></WatchlistItem>
       ))}
+      </div>
+
     </Fragment>
   );
 };

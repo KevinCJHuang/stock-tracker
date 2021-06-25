@@ -14,7 +14,7 @@ const WatchlistItem = ({ watchlistItem }) => {
   };
 
   return (
-    <div className='card m-2'>
+    <div className='card mx-4 my-3 border-0'>
       <div className='row'>
         <div className='col-6' style={{ borderRight: '1px solid #D3D3D3' }}>
           <div className='card-body'>
