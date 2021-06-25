@@ -8,6 +8,7 @@ export const ADD_TO_WATCHLIST = 'ADD_TO_WATCHLIST';
 export const CLEAR_STOCKS = 'CLEAR_STOCKS';
 export const WATCHLIST_ERROR = 'WATCHLIST_ERROR';
 export const WATCHLIST_SORT = 'WATCHLIST_SORT';
+export const STOCK_LOADING_FAIL = 'STOCK_LOADING_FAIL';
 
 // Alerts
 export const SET_ALERT = 'SET_ALERT';

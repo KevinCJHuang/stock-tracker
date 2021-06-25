@@ -6,6 +6,7 @@ import {
   ADD_TO_WATCHLIST,
   WATCHLIST_ERROR,
   CLEAR_STOCKS,
+  STOCK_LOADING_FAIL,
 } from '../types';
 
 const StockReducer = (state, action) => {
@@ -55,6 +56,12 @@ const StockReducer = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case STOCK_LOADING_FAIL:
+      return {
+        ...state,
+        stock: null,
+        loading: false,
       };
     default:
       return state;

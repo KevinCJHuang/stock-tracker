@@ -70,7 +70,7 @@ const PortfolioItem = ({ portfolioItem }) => {
             <div className='card-text ml-auto'>
               x{portfolioItem.numShares} Shares =
             </div>
-            <h4 className='ml-auto'>$ {portfolioItem.worth}</h4>
+            <h4 className='ml-auto'>$ {portfolioItem.worth.toFixed(2)}</h4>
           </div>
         </div>
       </div>

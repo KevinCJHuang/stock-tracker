@@ -10,6 +10,7 @@ import {
   ADD_TO_WATCHLIST,
   WATCHLIST_ERROR,
   CLEAR_STOCKS,
+  STOCK_LOADING_FAIL,
 } from '../types';
 
 const ixeToken = process.env.REACT_APP_IEX_TPK;
@@ -40,10 +41,6 @@ const StockState = (props) => {
       }
     );
 
-    // const res = await axios.get(
-    //   `https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${ixeToken}`
-    // );
-
     dispatch({
       type: SEARCH_STOCK,
       payload: res.data,
@@ -52,57 +49,55 @@ const StockState = (props) => {
 
   const getStockData = async (symbol, timeRange) => {
     dispatch({ type: SET_LOADING });
-
-    const res = await axios.get(
-      `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${timeRange}?chartCloseOnly=true&token=${ixeToken}`,
-      {
-        transformRequest: (data, headers) => {
-          delete headers.common['x-auth-token'];
-          return data;
-        },
-      }
-    );
-
-    // const res = await axios.get(
-    //   `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${timeRange}?chartCloseOnly=true&token=${ixeToken}`
-    // );
-
-    let graph_data = [];
-    res.data.forEach((unitData) => {
-      graph_data.push({
-        x: timeRange === '1d' ? unitData.minute : unitData.date,
-        y: unitData.close,
-      });
-    });
-
-    const datas = {
-      datasets: [
+    try {
+      const res = await axios.get(
+        `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${timeRange}?chartCloseOnly=true&token=${ixeToken}`,
         {
-          label: 'Stock Price',
-          data: graph_data,
-          fill: false,
-          borderColor: 'rgba(255, 99, 132, 0.2)',
-        },
-      ],
-    };
-
-    const options = {
-      scales: {
-        xAxes: [
-          {
-            title: 'time',
-            time: {
-              unit: 'day',
-            },
+          transformRequest: (data, headers) => {
+            delete headers.common['x-auth-token'];
+            return data;
           },
-        ],
-      },
-    };
+        }
+      );
+      let graph_data = [];
+        res.data.forEach((unitData) => {
+          graph_data.push({
+            x: timeRange === '1d' ? unitData.minute : unitData.date,
+            y: unitData.close,
+          });
+        });
 
-    dispatch({
-      type: SET_STOCK_GRAPH_DATA,
-      payload: [datas, options],
-    });
+        const datas = {
+          datasets: [
+            {
+              label: 'Stock Price',
+              data: graph_data,
+              fill: false,
+              borderColor: 'rgba(255, 99, 132, 0.2)',
+            },
+          ],
+        };
+
+        const options = {
+          scales: {
+            xAxes: [
+              {
+                title: 'time',
+                time: {
+                  unit: 'day',
+                },
+              },
+            ],
+          },
+        };
+
+        dispatch({
+          type: SET_STOCK_GRAPH_DATA,
+          payload: [datas, options],
+        });
+    } catch (error) {
+      dispatch({ type: STOCK_LOADING_FAIL});
+    }
   };
 
   const getStocks = async () => {

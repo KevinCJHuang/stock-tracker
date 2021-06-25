@@ -55,6 +55,23 @@ const Stock = (props) => {
   
   if (loading) {
     return <Spinner />;
+  } else if (stock === null) {
+    return (
+    <div className='container'>
+      <div className="card border-0">
+        <div className="card-body">
+          <h3 className="mb-3">
+            Sorry, the stock you searched for cannot be found. 
+          </h3>
+          <h3 className="mb-3">
+            Please enter the correct <b><u>Symbol</u></b> of the stock.
+          </h3>
+          <h4>
+            E.g. AAPL, TSLA, BILI
+          </h4>
+        </div>
+      </div>
+    </div>);
   } else {
     return (
       <div className='container'>

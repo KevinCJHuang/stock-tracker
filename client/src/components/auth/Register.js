@@ -13,7 +13,7 @@ const Register = (props) => {
       props.history.push('/');
     }
 
-    if (error === 'User already exists') {
+    if (error) {
       setAlert(error, 'danger');
       clearErrors();
     }
@@ -36,6 +36,8 @@ const Register = (props) => {
       setAlert('Please enter all fileds', 'danger');
     } else if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
+    } else if (password.length < 6) {
+      setAlert('Password must be at least 6 characteristics long', 'danger');
     } else {
       register({
         name: name,
