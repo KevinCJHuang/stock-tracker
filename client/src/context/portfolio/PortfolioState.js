@@ -60,8 +60,6 @@ const PortfolioState = (props) => {
           });
         })
     );
-    console.log(res.data)
-    // dispatch({ type: GET_PORTFOLIO });
     dispatch({ type: CALCULATE_STOCK_WORTH });
     dispatch({
       type: CALCULATE_CASH_WORTH,
@@ -107,8 +105,6 @@ const PortfolioState = (props) => {
 
   // Buy shares
   const buyShares = async (payload_stock, payload_cash) => {
-    console.log(payload_cash, payload_stock)
-
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -148,7 +144,6 @@ const PortfolioState = (props) => {
         'Content-Type': 'application/json',
       },
     };
-    console.log(payload_cash, payload_stock)
 
     // Sell stock
     try {
