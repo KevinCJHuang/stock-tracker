@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb://KevinCJHuang:KevinCJHuang@stocks-shard-00-00.skose.mongodb.net:27017,stocks-shard-00-01.skose.mongodb.net:27017,stocks-shard-00-02.skose.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-10ojlx-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://KevinCJHuang:KevinCJHuang@stock-tracker.kg2ng.mongodb.net/?retryWrites=true&w=majority",
   "jwtSecret": "stock-tracker"
 }

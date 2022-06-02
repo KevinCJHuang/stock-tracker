@@ -14,7 +14,7 @@ const About = () => {
         <strong>Email: </strong>kevin.cj.huang@gmail.com
       </p>
       <p>
-        <strong>Github: </strong>https://github.com/KevinCJHuang
+        <strong>Github: </strong>https://github.com/KevinCJHuang/stock-tracker
       </p>
       <p>
         <strong>Version: </strong>1.0.0

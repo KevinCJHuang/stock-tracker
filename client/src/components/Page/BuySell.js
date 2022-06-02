@@ -28,6 +28,7 @@ const BuySell = (props) => {
     if (targetStock) {
       setSharesAvailable(targetStock.numShares);
     }
+    // eslint-disable-next-line
   }, []);
 
   const onChange = (e) => {
@@ -96,7 +97,7 @@ const BuySell = (props) => {
                       activeTab === 'buy' ? 'nav-link active' : 'nav-link'
                     }
                     onClick={buyTab}
-                    href='#'
+                    href='/#'
                   >
                     Buy
                   </a>
@@ -107,7 +108,7 @@ const BuySell = (props) => {
                       activeTab === 'sell' ? 'nav-link active' : 'nav-link'
                     }
                     onClick={sellTab}
-                    href='#'
+                    href='/#'
                   >
                     Sell
                   </a>

@@ -10,7 +10,6 @@ import Alerts from './components/layout/Alerts';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
-
 import PrivateRoute from './components/routing/PrivateRoute';
 
 import StockState from './context/stock/StockState';
@@ -56,18 +55,10 @@ function App() {
 
                       <Route exact path='/Login' component={Login}></Route>
                       <Route
-  
-  
-                                                      exact
-
-
-                                                            path='/Register'
-                  
-                  
+                        exact
+                        path='/Register'
                         component={Register}
-                  
-                  
-                  ></Route>
+                      ></Route>
                     </Switch>
                   </div>
                 </Router>

@@ -1,13 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import StockContext from '../../context/stock/stockContext';
-import PortfolioContext from '../../context/portfolio/portfolioContext';
 
 const PortfolioItem = ({ portfolioItem }) => {
   const stockContext = useContext(StockContext);
   const { searchSymbol, getStockData } = stockContext;
-  const portfolioContext = useContext(PortfolioContext);
-  const { worth } = portfolioContext;
 
   const onClick = (e) => {
     searchSymbol(e.target.attributes.getNamedItem('symbol').value);

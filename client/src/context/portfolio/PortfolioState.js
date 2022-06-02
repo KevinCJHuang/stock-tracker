@@ -4,7 +4,6 @@ import axios from 'axios';
 import PortfolioContext from './portfolioContext';
 import PortfolioReducer from './portfolioReducer';
 import {
-  SET_LOADING,
   CALCULATE_STOCK_WORTH,
   ADD_TO_PORTFOLIO,
   CALCULATE_CASH_WORTH,

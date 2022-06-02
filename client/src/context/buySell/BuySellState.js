@@ -1,11 +1,9 @@
 import React, { useReducer } from 'react';
-import axios from 'axios';
 
 import BuySellContext from './buySellContext';
 import BuySellReducer from './buySellReducer';
 import { SET_BUYSELL } from '../types';
 
-const ixeToken = process.env.REACT_APP_IEX_TPK;
 const BuySellState = (props) => {
   const initialState = {
     activeTab: 'Buy',
