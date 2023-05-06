@@ -24,7 +24,7 @@ const Stock = (props) => {
   } = stockContext;
   const { setAlert } = alertContext;
   const { set_buySell } = buySellContext;
-  
+
   const setTimeRange = (e) => {
     getStockData(
       stock.symbol,
@@ -45,33 +45,36 @@ const Stock = (props) => {
   };
 
   const buy = (e) => {
-    set_buySell('buy')
+    set_buySell('buy');
     props.history.push('/buySell');
-  }
+  };
   const sell = (e) => {
-    set_buySell('sell')
+    set_buySell('sell');
     props.history.push('/buySell');
-  }
-  
+  };
+
   if (loading) {
     return <Spinner />;
   } else if (stock === null) {
     return (
-    <div className='container'>
-      <div className="card border-0">
-        <div className="card-body">
-          <h3 className="mb-3">
-            Sorry, the stock you searched for cannot be found. 
-          </h3>
-          <h3 className="mb-3">
-            Please enter the correct <b><u>Symbol</u></b> of the stock.
-          </h3>
-          <h4>
-            E.g. AAPL, TSLA, BILI
-          </h4>
+      <div className='container'>
+        <div className='card border-0'>
+          <div className='card-body'>
+            <h3 className='mb-3'>
+              Sorry, the stock you searched for cannot be found.
+            </h3>
+            <h3 className='mb-3'>
+              Please enter the correct{' '}
+              <b>
+                <u>Symbol</u>
+              </b>{' '}
+              of the stock.
+            </h3>
+            <h4>E.g. AAPL, TSLA, BILI</h4>
+          </div>
         </div>
       </div>
-    </div>);
+    );
   } else {
     return (
       <div className='container'>
@@ -79,12 +82,13 @@ const Stock = (props) => {
           <div className='card-body'>
             <div className='row mx-2'>
               <div className='col-9 border-0 p-2'>
-                <h2 className='card-title '>{stock.companyName} </h2>
+                <h2 className='card-title' style={{ color: 'red' }}>
+                  {stock.companyName}
+                </h2>
                 <h4 className='card-subtitle text-muted'>({stock.symbol})</h4>
               </div>
               <div className='col-3'>
-
-              {inWatchlist ? (
+                {inWatchlist ? (
                   <button
                     className='btn btn-dark btn-block mb-3'
                     onClick={removeFromWatchlistClick}
@@ -92,7 +96,7 @@ const Stock = (props) => {
                     <i className='fa fa-minus mr-2'></i>
                     Remove from Watchlist
                   </button>
-              ) : (
+                ) : (
                   <button
                     className='btn btn-light btn-block mb-3'
                     onClick={addToWatchlistClick}
@@ -100,14 +104,26 @@ const Stock = (props) => {
                     <i className='fa fa-plus mr-2'></i>
                     Add to Watchlist
                   </button>
-              )}
-              <div className="row">
-                <div className="col-6"><button className="btn btn-outline-success btn-block" onClick={buy}>Buy</button></div>
-                <div className="col-6"><button className="btn btn-outline-danger btn-block" onClick={sell}>Sell</button></div>
+                )}
+                <div className='row'>
+                  <div className='col-6'>
+                    <button
+                      className='btn btn-outline-success btn-block'
+                      onClick={buy}
+                    >
+                      Buy
+                    </button>
+                  </div>
+                  <div className='col-6'>
+                    <button
+                      className='btn btn-outline-danger btn-block'
+                      onClick={sell}
+                    >
+                      Sell
+                    </button>
+                  </div>
+                </div>
               </div>
-
-              </div>
-
             </div>
           </div>
         </div>
